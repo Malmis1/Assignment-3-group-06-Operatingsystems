@@ -1,6 +1,7 @@
 package no.ntnu;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,6 +24,58 @@ public class FCFS {
      */
     public void addProcess(CPUProcess process) {
         this.processes.add(process);
+    }
+
+    /**
+     * Gets the queue with priorities considered.
+     * 
+     * @return the complete queue.
+     */
+    public List<CPUProcess> getCompleteQueue() {
+        List<CPUProcess> sortedQueue = this.getSortedQueue();
+        Iterator<CPUProcess> it = sortedQueue.iterator();
+        if (!it.hasNext()) {
+            return sortedQueue;
+        }
+        CPUProcess currentProcess = it.next();
+        if (!it.hasNext()) {
+            return sortedQueue;
+        }
+        CPUProcess nextProcess = it.next();
+        List<CPUProcess> queue = new ArrayList<>();
+        boolean isComplete = false;
+        while (!isComplete) {
+            if (currentProcess == null) {
+                isComplete = true;
+            } else if (nextProcess == null) {
+                queue.add(currentProcess);
+                currentProcess = null;
+            } else {
+                if ((nextProcess.getArrivalTime() > (currentProcess.getArrivalTime() + currentProcess.getBurstTime()))
+                        || (nextProcess.getPriority() >= currentProcess.getPriority())) {
+                    queue.add(currentProcess);
+                    currentProcess = nextProcess;
+                    nextProcess = it.hasNext() ? it.next() : null;
+                } else {
+                    CPUProcess fragmentedProcess1 = new CPUProcess(currentProcess.getId(),
+                            currentProcess.getArrivalTime(),
+                            currentProcess.getArrivalTime() + currentProcess.getBurstTime()
+                                    - nextProcess.getArrivalTime(),
+                            currentProcess.getPriority());
+                    CPUProcess fragmentedProcess2 = new CPUProcess(currentProcess.getId(),
+                            nextProcess.getArrivalTime() + nextProcess.getBurstTime(),
+                            currentProcess.getBurstTime() - fragmentedProcess1.getBurstTime(),
+                            currentProcess.getPriority());
+                    if (fragmentedProcess1.getBurstTime() != 0) {
+                        queue.add(fragmentedProcess1);
+                    }
+                    currentProcess = nextProcess;
+                    nextProcess = fragmentedProcess2;
+                }
+            }
+        }
+
+        return queue;
     }
 
     /**

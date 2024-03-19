@@ -39,18 +39,18 @@ public class FCFS {
 
         List<CPUProcess> queue = new ArrayList<>();
         List<CPUProcess> remainingProcesses = this.processes;
-        CPUProcess firstArrival = null;
+        CPUProcess earliestArrival = null;
         while (remainingProcesses.size() != 0) {
             for (CPUProcess process : this.processes) {
                 if (remainingProcesses.contains(process)) {
-                    if (firstArrival == null || process.getArrivalTime() < firstArrival.getArrivalTime()) {
-                        firstArrival = process;
+                    if (earliestArrival == null || process.getArrivalTime() < earliestArrival.getArrivalTime()) {
+                        earliestArrival = process;
                     }
                 }
             }
-            queue.add(firstArrival);
-            remainingProcesses.remove(firstArrival);
-            firstArrival = null;
+            queue.add(earliestArrival);
+            remainingProcesses.remove(earliestArrival);
+            earliestArrival = null;
         }
 
         return queue;

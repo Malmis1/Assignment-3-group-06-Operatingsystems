@@ -60,6 +60,11 @@ public class FCFS {
         return 0;
     }
 
+    /**
+     * Gets the average waiting time of all the processes.
+     *
+     * @return return the average waiting time of all the processes.
+     */
     public float getAverageWaitingTime() {
         float combinedWaitingTime = 0;
 

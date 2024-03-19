@@ -97,6 +97,9 @@ public class CPUProcess {
      *
      * @return the waiting time of the process.
      */
+    public int getTurnaroundTime(){
+        return 1;
+    }
     public int getWaitingTime() {
         return this.getTurnaroundTime() - this.burstTime;
     }

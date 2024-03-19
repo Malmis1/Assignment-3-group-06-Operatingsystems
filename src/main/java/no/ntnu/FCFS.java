@@ -19,9 +19,7 @@ public class FCFS {
     /**
      * Adds a process to be handled by the scheduling algorithm.
      * 
-     * @param id          the id of the process.
-     * @param arrivalTime the arrival time of the process.
-     * @param burstTime   the burst time of the process.
+     * @param process the process to be added.
      */
     public void addProcess(CPUProcess process) {
         this.processes.add(process);

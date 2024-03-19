@@ -32,7 +32,7 @@ public class FCFS {
      * @return a list of all the processes sorted by arrival times.
      * @throws IllegalStateException if there are no processes added.
      */
-    private List<CPUProcess> getSortedQueue() throws IllegalStateException {
+    public List<CPUProcess> getSortedQueue() throws IllegalStateException {
         if (this.processes.size() == 0) {
             throw new IllegalStateException("there must be at least one process");
         }

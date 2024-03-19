@@ -9,5 +9,8 @@ public class Main {
         fcfs.addProcess(process1);
         fcfs.addProcess(process2);
         fcfs.addProcess(process3);
+        double avgTurnaroundTime = fcfs.getAverageTurnaroundTime();
+        System.out.println(avgTurnaroundTime);
+
     }
 }

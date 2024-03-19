@@ -91,6 +91,19 @@ public class CPUProcess {
         return this.burstTime;
     }
 
+    public int getTurnaroundTime() {
+        return 0;
+    }
+
+    /**
+     * Gets the waiting time of the process.
+     *
+     * @return the waiting time of the process.
+     */
+    public int getWaitingTime() {
+        return this.getTurnaroundTime() - this.burstTime;
+    }
+
     /**
      * Sets the burst time of the process.
      * 

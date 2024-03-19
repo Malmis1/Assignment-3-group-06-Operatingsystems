@@ -55,4 +55,18 @@ public class FCFS {
 
         return queue;
     }
+
+    public float getAverageTurnaroundTime() {
+        return 0;
+    }
+
+    public float getAverageWaitingTime() {
+        float combinedWaitingTime = 0;
+
+        for (CPUProcess process : this.processes) {
+            combinedWaitingTime += process.getWaitingTime();
+        }
+
+        return combinedWaitingTime / this.processes.size();
+    }
 }

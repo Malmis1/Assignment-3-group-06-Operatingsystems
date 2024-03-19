@@ -32,6 +32,7 @@ public class FCFS {
      * @return the complete queue.
      */
     public List<CPUProcess> getCompleteQueue() {
+        // This method is broken
         List<CPUProcess> sortedQueue = this.getSortedQueue();
         Iterator<CPUProcess> it = sortedQueue.iterator();
         if (!it.hasNext()) {
@@ -59,12 +60,16 @@ public class FCFS {
                 } else {
                     CPUProcess fragmentedProcess1 = new CPUProcess(currentProcess.getId(),
                             currentProcess.getArrivalTime(),
-                            currentProcess.getArrivalTime() + currentProcess.getBurstTime()
-                                    - nextProcess.getArrivalTime(),
+                            (nextProcess.getArrivalTime() - currentProcess.getArrivalTime()) < 0
+                                    ? currentProcess.getArrivalTime() + currentProcess.getBurstTime()
+                                            - nextProcess.getArrivalTime()
+                                    : nextProcess.getArrivalTime() - currentProcess.getArrivalTime(),
                             currentProcess.getPriority());
                     CPUProcess fragmentedProcess2 = new CPUProcess(currentProcess.getId(),
                             nextProcess.getArrivalTime() + nextProcess.getBurstTime(),
-                            currentProcess.getBurstTime() - fragmentedProcess1.getBurstTime(),
+                            currentProcess.getBurstTime() > fragmentedProcess1.getBurstTime()
+                                    ? currentProcess.getBurstTime() - fragmentedProcess1.getBurstTime()
+                                    : fragmentedProcess1.getBurstTime() - currentProcess.getBurstTime(),
                             currentProcess.getPriority());
                     if (fragmentedProcess1.getBurstTime() != 0) {
                         queue.add(fragmentedProcess1);

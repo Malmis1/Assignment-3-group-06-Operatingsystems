@@ -56,10 +56,6 @@ public class FCFS {
         return queue;
     }
 
-    public float getAverageTurnaroundTime() {
-        return 0;
-    }
-
     /**
      * Gets the average waiting time of all the processes.
      *

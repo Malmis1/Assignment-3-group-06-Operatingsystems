@@ -15,7 +15,8 @@ public class CPUProcess {
      * @param id          the id of the process.
      * @param arrivalTime the arrival time of the process.
      * @param burstTime   the burst time of the process.
-     * @param priority    the priority of the process.
+     * @param priority    the priority of the process, where smaller numbers have
+     *                    higher priority.
      * @throws IllegalArgumentException if any of the provided parameters are
      *                                  invalid.
      */
@@ -91,6 +92,19 @@ public class CPUProcess {
         return this.burstTime;
     }
 
+    public int getTurnaroundTime() {
+        return 0;
+    }
+
+    /**
+     * Gets the waiting time of the process.
+     *
+     * @return the waiting time of the process.
+     */
+    public int getWaitingTime() {
+        return this.getTurnaroundTime() - this.burstTime;
+    }
+
     /**
      * Sets the burst time of the process.
      * 
@@ -114,7 +128,8 @@ public class CPUProcess {
     }
 
     /**
-     * Sets the priority of the process.
+     * Sets the priority of the process. The smaller the number is, the higher the
+     * priority becomes.
      * 
      * @param priority the priority to set.
      */

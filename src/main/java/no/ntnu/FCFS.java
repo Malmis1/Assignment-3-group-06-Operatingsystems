@@ -66,7 +66,12 @@ public class FCFS {
 
         return combinedWaitingTime / this.processes.size();
     }
-
+    /**
+     * Calculates the average turnaround time for the processes scheduled using FCFS algorithm.
+     *
+     * @return the average turnaround time.
+     * @throws IllegalStateException if there are no processes added or if the queue is empty.
+     */
     public double getAverageTurnaroundTime() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
         int n = sortedQueue.size();

@@ -7,8 +7,13 @@ public class CPUProcess {
     private int id;
     private int arrivalTime;
     private int burstTime;
+    private int remainingBurstTime;
     private int priority;
     private float completionTime;
+    private float startTime;
+    private float waitingTime;
+    private float turnaroundTime;
+    private boolean started = false;
 
     /**
      * Creates a new instance of {@code CPUProcess}.
@@ -41,6 +46,7 @@ public class CPUProcess {
         this.setId(id);
         this.setArrivalTime(arrivalTime);
         this.setBurstTime(burstTime);
+        this.remainingBurstTime = burstTime;
         this.priority = 0;
     }
 
@@ -113,12 +119,19 @@ public class CPUProcess {
 
 
     /**
-     * Sets the turnaround time of the process.
+     * Calculates and updates the turnaround time for the process.
+     */
+    public void calculateTurnaroundTime() {
+        this.turnaroundTime = this.completionTime - this.arrivalTime;
+    }
+
+    /**
+     * Gets the turnaround time of the process.
      *
      * @return the turnaround time of the process.
      */
     public float getTurnaroundTime() {
-        return this.completionTime - this.arrivalTime;
+        return this.turnaroundTime;
     }
 
     /**
@@ -151,5 +164,37 @@ public class CPUProcess {
      */
     private void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    /**
+     * Resets the waiting and turnaround times for this process.
+     */
+    public void resetWaitingAndTurnaroundTimes() {
+        // Reset only if the process has started, otherwise keep initial values
+        if (this.started) {
+            this.waitingTime = 0;
+        }
+    }
+
+    /**
+     * Gets the remaining burst time of the process.
+     *
+     * @return The remaining burst time.
+     */
+    public int getRemainingBurstTime() {
+        return this.remainingBurstTime;
+    }
+
+    /**
+     * Sets the start time of the process. This method also marks the process as started.
+     *
+     * @param startTime The start time to set.
+     */
+    public void setStartTime(float startTime) {
+        // Only set the start time if the process hasn't started before
+        if (!this.started) {
+            this.startTime = startTime;
+            this.started = true;
+        }
     }
 }

@@ -148,7 +148,6 @@ public class CPUScheduler {
 
             // Execute current process for a unit time
             if (currentProcess != null) {
-                currentProcess.executeForOneUnit();
                 currentTime++;
 
                 // If the process is completed, update its completion and turnaround times
@@ -164,15 +163,35 @@ public class CPUScheduler {
         }
     }
 
+    /**
+     * Calculates the average waiting time for all processes for the Preemptive Priority scheduling algorithm.
+     *
+     * @return The average waiting time for all processes. Returns 0 if there are no processes.
+     */
     public float getAverageWaitingTimePreemptivePriority() {
         calculatePreemptivePriority();
-        // Similar calculation logic to FCFS but after running calculatePreemptivePriority
-        return 0;
+
+        float totalWaitingTime = 0;
+        for (CPUProcess process : this.processes) {
+            totalWaitingTime += process.getWaitingTime();
+        }
+
+        return processes.isEmpty() ? 0 : totalWaitingTime / this.processes.size();
     }
 
+    /**
+     * Calculates the average turnaround time for all processes for the Preemptive Priority scheduling algorithm.
+     *
+     * @return The average turnaround time for all processes. Returns 0 if there are no processes.
+     */
     public double getAverageTurnaroundTimePreemptivePriority() {
         calculatePreemptivePriority();
-        // Similar calculation logic to FCFS but after running calculatePreemptivePriority
-        return 0;
+
+        double totalTurnaroundTime = 0;
+        for (CPUProcess process : this.processes) {
+            totalTurnaroundTime += process.getTurnaroundTime();
+        }
+
+        return processes.isEmpty() ? 0 : totalTurnaroundTime / this.processes.size();
     }
 }

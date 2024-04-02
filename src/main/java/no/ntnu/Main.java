@@ -8,14 +8,23 @@ public class Main {
         CPUProcess process3 = new CPUProcess(3, 12, 2, 3);
         CPUProcess process4 = new CPUProcess(4, 2, 10, 1);
         CPUProcess process5 = new CPUProcess(5, 9, 16, 4);
+
         CPUScheduler.addProcess(process1);
         CPUScheduler.addProcess(process2);
         CPUScheduler.addProcess(process3);
         CPUScheduler.addProcess(process4);
         CPUScheduler.addProcess(process5);
-        double avgWaitingTime = CPUScheduler.getAverageWaitingTimeFCFS();
-        double avgTurnaroundTime = CPUScheduler.getAverageTurnaroundTimeFCFS();
-        System.out.println("avgWaitingTime: " + avgWaitingTime);
-        System.out.println("avgTurnaroundTime: " + avgTurnaroundTime);
+
+        // For FCFS
+        double avgWaitingTimeFCFS = CPUScheduler.getAverageWaitingTimeFCFS();
+        double avgTurnaroundTimeFCFS = CPUScheduler.getAverageTurnaroundTimeFCFS();
+        System.out.println("FCFS Average Waiting Time: " + avgWaitingTimeFCFS);
+        System.out.println("FCFS Average Turnaround Time: " + avgTurnaroundTimeFCFS);
+
+        // For Preemptive Priority
+        double avgWaitingTimePreemptivePriority = CPUScheduler.getAverageWaitingTimePreemptivePriority();
+        double avgTurnaroundTimePreemptivePriority = CPUScheduler.getAverageTurnaroundTimePreemptivePriority();
+        System.out.println("Preemptive Priority Average Waiting Time: " + avgWaitingTimePreemptivePriority);
+        System.out.println("Preemptive Priority Average Turnaround Time: " + avgTurnaroundTimePreemptivePriority);
     }
 }

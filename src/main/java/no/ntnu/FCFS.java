@@ -72,7 +72,7 @@ public class FCFS {
      * @return the average turnaround time.
      * @throws IllegalStateException if there are no processes added or if the queue is empty.
      */
-    public double getAverageTurnaroundTime() throws IllegalStateException {
+    public double calculateAverageTurnaroundTime() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
         int n = sortedQueue.size();
 
@@ -92,6 +92,6 @@ public class FCFS {
             totalTurnaroundTime += turnaroundTime[i];
         }
 
-        return totalTurnaroundTime / n;
+        return totalTurnaroundTime/n;
     }
 }

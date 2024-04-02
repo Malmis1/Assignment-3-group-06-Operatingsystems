@@ -8,6 +8,7 @@ public class CPUProcess {
     private int arrivalTime;
     private int burstTime;
     private int priority;
+    private float completionTime;
 
     /**
      * Creates a new instance of {@code CPUProcess}.
@@ -92,17 +93,32 @@ public class CPUProcess {
         return this.burstTime;
     }
 
-    public int getTurnaroundTime() {
-        return 1;
-    }
-
     /**
      * Gets the waiting time of the process.
      *
      * @return the waiting time of the process.
      */
-    public int getWaitingTime() {
+    public float getWaitingTime() {
         return this.getTurnaroundTime() - this.burstTime;
+    }
+
+    /**
+     * Sets the completion time of the process.
+     *
+     * @param completionTime the completion time to set.
+     */
+    public void setCompletionTime(float completionTime) {
+        this.completionTime = completionTime;
+    }
+
+
+    /**
+     * Sets the turnaround time of the process.
+     *
+     * @return the turnaround time of the process.
+     */
+    public float getTurnaroundTime() {
+        return this.completionTime - this.arrivalTime;
     }
 
     /**

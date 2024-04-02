@@ -101,7 +101,9 @@ public class FCFS {
         while (remainingProcesses.size() != 0) {
             for (CPUProcess process : this.processes) {
                 if (remainingProcesses.contains(process)) {
-                    if (earliestArrival == null || process.getArrivalTime() < earliestArrival.getArrivalTime()) {
+                    if (earliestArrival == null || process.getArrivalTime() < earliestArrival.getArrivalTime()
+                            || (process.getArrivalTime() == earliestArrival.getArrivalTime()
+                                    && process.getPriority() < earliestArrival.getPriority())) {
                         earliestArrival = process;
                     }
                 }

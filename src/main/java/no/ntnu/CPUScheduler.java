@@ -79,7 +79,7 @@ public class CPUScheduler {
      * @return the average turnaround time.
      * @throws IllegalStateException if there are no processes added or if the queue is empty.
      */
-    public double getAverageTurnaroundTimeFCFS() throws IllegalStateException {
+    public double[] calculateAverageTurnaroundAndWaitingTime() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
         if (sortedQueue.isEmpty()) {
             throw new IllegalStateException("No processes added.");
@@ -88,6 +88,7 @@ public class CPUScheduler {
         int n = sortedQueue.size();
         int[] completionTime = new int[n];
         double totalTurnaroundTime = 0;
+        double totalWaitingTime = 0;
 
         completionTime[0] = sortedQueue.get(0).getBurstTime() + sortedQueue.get(0).getArrivalTime();
         sortedQueue.get(0).setCompletionTime(completionTime[0]);
@@ -100,9 +101,20 @@ public class CPUScheduler {
 
             currentProcess.setCompletionTime(completionTime[i]);
             totalTurnaroundTime += completionTime[i] - currentProcess.getArrivalTime();
+
+            // Calculate waiting time for current process
+            int waitingTime = startAfterPreviousCompletion - currentProcess.getArrivalTime();
+            totalWaitingTime += waitingTime;
         }
 
-        return totalTurnaroundTime / n;
+        // Calculate average waiting time
+        double averageWaitingTime = totalWaitingTime / n;
+
+        // Calculate average turnaround time
+        double averageTurnaroundTime = totalTurnaroundTime / n;
+
+        // Return both average waiting time and average turnaround time
+        return new double[]{averageWaitingTime, averageTurnaroundTime};
     }
 
     public void calculatePreemptivePriority() {

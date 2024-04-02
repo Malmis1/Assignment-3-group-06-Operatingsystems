@@ -16,10 +16,12 @@ public class Main {
         CPUScheduler.addProcess(process5);
 
         // For FCFS
-        double avgWaitingTimeFCFS = CPUScheduler.getAverageWaitingTimeFCFS();
-        double avgTurnaroundTimeFCFS = CPUScheduler.getAverageTurnaroundTimeFCFS();
-        System.out.println("FCFS Average Waiting Time: " + avgWaitingTimeFCFS);
-        System.out.println("FCFS Average Turnaround Time: " + avgTurnaroundTimeFCFS);
+
+        double[] results = CPUScheduler.calculateAverageTurnaroundAndWaitingTime();
+        double averageWaitingTime = results[0];
+        double averageTurnaroundTime = results[1];
+        System.out.println("FCFS Average Waiting Time: " + averageWaitingTime);
+        System.out.println("FCFS Average Turnaround Time: " + averageTurnaroundTime);
 
         // For Preemptive Priority
         double avgWaitingTimePreemptivePriority = CPUScheduler.getAverageWaitingTimePreemptivePriority();

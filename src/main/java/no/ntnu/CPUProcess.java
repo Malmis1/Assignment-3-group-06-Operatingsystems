@@ -14,6 +14,7 @@ public class CPUProcess {
     private float waitingTime;
     private float turnaroundTime;
     private boolean started = false;
+    private boolean completed = false;
 
     /**
      * Creates a new instance of {@code CPUProcess}.
@@ -31,6 +32,8 @@ public class CPUProcess {
         this.setArrivalTime(arrivalTime);
         this.setBurstTime(burstTime);
         this.setPriority(priority);
+        this.remainingBurstTime = burstTime; // Make sure to initialize this correctly.
+        this.completed = false;
     }
 
     /**
@@ -115,6 +118,7 @@ public class CPUProcess {
      */
     public void setCompletionTime(float completionTime) {
         this.completionTime = completionTime;
+        this.calculateTurnaroundTime();
     }
 
 
@@ -195,6 +199,18 @@ public class CPUProcess {
         if (!this.started) {
             this.startTime = startTime;
             this.started = true;
+        }
+    }
+
+    public void executeForOneUnit() {
+        // Check if the process has remaining time and is not already completed
+        if (this.remainingBurstTime > 0 && !this.completed) {
+            this.remainingBurstTime--;
+            // Check if the process completes after this execution unit
+            if (this.remainingBurstTime == 0) {
+                this.completed = true;
+                // Completion time and other calculations need to be done outside as they depend on global simulation time
+            }
         }
     }
 }

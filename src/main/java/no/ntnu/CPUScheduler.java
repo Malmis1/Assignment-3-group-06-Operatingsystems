@@ -34,29 +34,18 @@ public class CPUScheduler {
      * @return a list of all the processes sorted by arrival times.
      * @throws IllegalStateException if there are no processes added.
      */
-    public List<CPUProcess> getSortedQueue() throws IllegalStateException {
+    public List<CPUProcess> getSortedQueue() {
         if (this.processes.isEmpty()) {
             throw new IllegalStateException("there must be at least one process");
         }
 
-        List<CPUProcess> queue = new ArrayList<>();
-        List<CPUProcess> remainingProcesses = this.processes;
-        CPUProcess earliestArrival = null;
-        while (!remainingProcesses.isEmpty()) {
-            for (CPUProcess process : this.processes) {
-                if (remainingProcesses.contains(process)) {
-                    if (earliestArrival == null || process.getArrivalTime() < earliestArrival.getArrivalTime()) {
-                        earliestArrival = process;
-                    }
-                }
-            }
-            queue.add(earliestArrival);
-            remainingProcesses.remove(earliestArrival);
-            earliestArrival = null;
-        }
+        // Create a copy of the processes list to sort, ensuring the original list is not modified
+        List<CPUProcess> sortedProcesses = new ArrayList<>(this.processes);
+        sortedProcesses.sort(Comparator.comparingInt(CPUProcess::getArrivalTime));
 
-        return queue;
+        return sortedProcesses;
     }
+
 
     /**
      * Calculates the average waiting time for all processes for the FCFS scheduling algorithm.
@@ -118,7 +107,7 @@ public class CPUScheduler {
     }
 
     public void calculatePreemptivePriority() {
-        // Reset times for all processes
+        // Reset processes for a fresh calculation.
         for (CPUProcess process : this.processes) {
             process.setCompletionTime(0);
             process.resetWaitingAndTurnaroundTimes();
@@ -160,6 +149,7 @@ public class CPUScheduler {
 
             // Execute current process for a unit time
             if (currentProcess != null) {
+                currentProcess.executeForOneUnit();
                 currentTime++;
 
                 // If the process is completed, update its completion and turnaround times

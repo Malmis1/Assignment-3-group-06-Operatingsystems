@@ -26,7 +26,7 @@ public class FCFS {
     }
 
     /**
-     * Gets a list of all the processes sorted by arrival times in an ascending
+     * Gets a list of all the processes sorted by arrival times in ascending
      * order.
      * 
      * @return a list of all the processes sorted by arrival times.
@@ -57,7 +57,7 @@ public class FCFS {
     }
 
 
-    public float getAverageWaitingTime() {
+    public float getAverageWaitingTimeFCFS() {
         float combinedWaitingTime = 0;
 
         for (CPUProcess process : this.processes) {
@@ -66,13 +66,14 @@ public class FCFS {
 
         return combinedWaitingTime / this.processes.size();
     }
+
     /**
      * Calculates the average turnaround time for the processes scheduled using FCFS algorithm.
      *
      * @return the average turnaround time.
      * @throws IllegalStateException if there are no processes added or if the queue is empty.
      */
-    public double getAverageTurnaroundTime() throws IllegalStateException {
+    public double getAverageTurnaroundTimeFCFS() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
         if (sortedQueue.isEmpty()) {
             throw new IllegalStateException("No processes added.");

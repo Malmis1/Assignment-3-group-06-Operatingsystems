@@ -9,8 +9,11 @@ public class Main {
         fcfs.addProcess(process1);
         fcfs.addProcess(process2);
         fcfs.addProcess(process3);
+        double avgWaitingTime = fcfs.getAverageWaitingTime();
         double avgTurnaroundTime = fcfs.getAverageTurnaroundTime();
-        System.out.println(avgTurnaroundTime);
+        System.out.println("avgWaitingTime: " + avgWaitingTime);
+        System.out.println("avgTurnaroundTime: " + avgTurnaroundTime);
+
 
     }
 }

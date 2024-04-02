@@ -74,22 +74,25 @@ public class FCFS {
      */
     public double getAverageTurnaroundTime() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
-        int n = sortedQueue.size();
-
-        int[] completionTime = new int[n];
-        int[] turnaroundTime = new int[n];
-
-        completionTime[0] = sortedQueue.get(0).getBurstTime();
-        turnaroundTime[0] = completionTime[0] - sortedQueue.get(0).getArrivalTime();
-
-        for (int i = 1; i < n; i++) {
-            completionTime[i] = completionTime[i - 1] + sortedQueue.get(i).getBurstTime();
-            turnaroundTime[i] = completionTime[i] - sortedQueue.get(i).getArrivalTime();
+        if (sortedQueue.isEmpty()) {
+            throw new IllegalStateException("No processes added.");
         }
 
+        int n = sortedQueue.size();
+        int[] completionTime = new int[n];
         double totalTurnaroundTime = 0;
-        for (int i = 0; i < n; i++) {
-            totalTurnaroundTime += turnaroundTime[i];
+
+        completionTime[0] = sortedQueue.get(0).getBurstTime() + sortedQueue.get(0).getArrivalTime();
+        sortedQueue.get(0).setCompletionTime(completionTime[0]);
+        totalTurnaroundTime = completionTime[0] - sortedQueue.get(0).getArrivalTime();
+
+        for (int i = 1; i < n; i++) {
+            CPUProcess currentProcess = sortedQueue.get(i);
+            int startAfterPreviousCompletion = Math.max(completionTime[i - 1], currentProcess.getArrivalTime());
+            completionTime[i] = startAfterPreviousCompletion + currentProcess.getBurstTime();
+
+            currentProcess.setCompletionTime(completionTime[i]);
+            totalTurnaroundTime += completionTime[i] - currentProcess.getArrivalTime();
         }
 
         return totalTurnaroundTime / n;

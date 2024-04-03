@@ -32,7 +32,7 @@ public class CPUProcess {
         this.setArrivalTime(arrivalTime);
         this.setBurstTime(burstTime);
         this.setPriority(priority);
-        this.remainingBurstTime = burstTime; // Make sure to initialize this correctly.
+        this.remainingBurstTime = this.burstTime;
         this.completed = false;
     }
 
@@ -49,7 +49,7 @@ public class CPUProcess {
         this.setId(id);
         this.setArrivalTime(arrivalTime);
         this.setBurstTime(burstTime);
-        this.remainingBurstTime = burstTime;
+        this.remainingBurstTime = this.burstTime;
         this.priority = 0;
     }
 

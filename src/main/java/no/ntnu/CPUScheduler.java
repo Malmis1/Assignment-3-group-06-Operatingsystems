@@ -88,7 +88,7 @@ public class CPUScheduler {
     }
 
     /**
-     * Executes preemptive priority scheduling on the process.
+     * Calculates the preemptive priority scheduling on the process.
      */
     public void calculatePreemptivePriority() {
         for (CPUProcess process : this.processes) {

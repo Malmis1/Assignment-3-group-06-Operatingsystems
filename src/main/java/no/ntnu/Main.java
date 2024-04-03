@@ -81,7 +81,7 @@ public class Main {
             id++;
         }
 
-        System.out.println("Results:");
+        System.out.println("\nResults:");
         System.out.println("========");
         if (algorithm == 1) {
             // For FCFS

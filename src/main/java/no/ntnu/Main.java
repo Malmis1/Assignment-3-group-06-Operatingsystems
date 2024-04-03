@@ -4,17 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // CPUProcess process1 = new CPUProcess(1, 4, 5, 0);
-        // CPUProcess process2 = new CPUProcess(2, 6, 4, 0);
-        // CPUProcess process3 = new CPUProcess(3, 0, 3, 0);
-        // CPUProcess process4 = new CPUProcess(4, 6, 2, 0);
-        // CPUProcess process5 = new CPUProcess(5, 5, 4, 0);
-        // CPUScheduler.addProcess(process1);
-        // CPUScheduler.addProcess(process2);
-        // CPUScheduler.addProcess(process3);
-        // CPUScheduler.addProcess(process4);
-        // CPUScheduler.addProcess(process5);
-
         Scanner scanner = new Scanner(System.in);
         CPUScheduler CPUScheduler = new CPUScheduler();
 

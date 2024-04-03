@@ -34,6 +34,15 @@ public class CPUProcess {
     }
 
     /**
+     * Gets the ID of the process.
+     * 
+     * @return the ID of the process.
+     */
+    public int getID() {
+        return this.id;
+    }
+
+    /**
      * Gets the arrival time of the process.
      *
      * @return the arrival time of the process.

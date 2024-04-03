@@ -1,6 +1,7 @@
 package no.ntnu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -100,6 +101,7 @@ public class CPUScheduler {
 
         // Sort processes by arrival time to manage the arrival of new processes
         List<CPUProcess> sortedProcesses = new ArrayList<>(this.processes);
+        Collections.reverse(sortedProcesses);
         sortedProcesses.sort(Comparator.comparingInt(CPUProcess::getArrivalTime));
 
         int currentTime = 0;

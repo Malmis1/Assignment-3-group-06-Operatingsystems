@@ -11,7 +11,7 @@ public class CPUProcess {
     private int priority;
     private double completionTime;
     private double turnaroundTime;
-    private boolean completed = false;
+    private boolean completed;
 
     /**
      * Creates a new instance of {@code CPUProcess} with a specified priority.

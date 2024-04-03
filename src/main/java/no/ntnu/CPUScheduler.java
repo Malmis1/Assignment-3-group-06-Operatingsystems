@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Represents Preemptive Priority scheduling alongside FCFS scheduling algorithm.
+ * Represents Preemptive Priority scheduling alongside FCFS scheduling
+ * algorithm.
  */
 public class CPUScheduler {
     private final List<CPUProcess> processes;
@@ -29,8 +30,7 @@ public class CPUScheduler {
     }
 
     /**
-     * Gets a list of all the processes sorted by arrival times in ascending
-     * order.
+     * Gets a list of all the processes sorted by arrival times in ascending order.
      * 
      * @return a list of all the processes sorted by arrival times.
      * @throws IllegalStateException if there are no processes added.
@@ -40,7 +40,8 @@ public class CPUScheduler {
             throw new IllegalStateException("there must be at least one process");
         }
 
-        // Create a copy of the processes list to sort, ensuring the original list is not modified
+        // Create a copy of the processes list to sort, ensuring the original list is
+        // not modified
         List<CPUProcess> sortedProcesses = new ArrayList<>(this.processes);
         sortedProcesses.sort(Comparator.comparingInt(CPUProcess::getArrivalTime));
 
@@ -48,10 +49,12 @@ public class CPUScheduler {
     }
 
     /**
-     * Calculates the average turnaround time for the processes scheduled using FCFS algorithm.
+     * Calculates the average turnaround time for the processes scheduled using FCFS
+     * algorithm.
      *
      * @return the average turnaround time.
-     * @throws IllegalStateException if there are no processes added or if the queue is empty.
+     * @throws IllegalStateException if there are no processes added or if the queue
+     *                               is empty.
      */
     public double[] calculateAverageTurnaroundAndWaitingTime() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
@@ -84,7 +87,7 @@ public class CPUScheduler {
 
         double averageTurnaroundTime = totalTurnaroundTime / n;
 
-        return new double[]{averageWaitingTime, averageTurnaroundTime};
+        return new double[] { averageWaitingTime, averageTurnaroundTime };
     }
 
     /**
@@ -118,7 +121,10 @@ public class CPUScheduler {
                 if (!queue.isEmpty()) {
                     currentProcess = queue.poll();
                 }
-            } else if (!queue.isEmpty() && queue.peek().getPriority() < currentProcess.getPriority()) { // Check for higher priority process
+            } else if (!queue.isEmpty() && queue.peek().getPriority() < currentProcess.getPriority()) { // Check for
+                                                                                                        // higher
+                                                                                                        // priority
+                                                                                                        // process
                 CPUProcess preemptedProcess = currentProcess;
                 currentProcess = queue.poll();
                 queue.add(preemptedProcess);
@@ -126,7 +132,7 @@ public class CPUScheduler {
             // Execute current process for a unit time
             if (currentProcess != null) {
                 currentProcess.executeForOneUnit();
-                
+
                 // If the process is completed, update its completion and turnaround times
                 if (currentProcess.getRemainingBurstTime() <= 0) {
                     currentProcess.setCompletionTime(currentTime + 1);
@@ -143,9 +149,11 @@ public class CPUScheduler {
     }
 
     /**
-     * Calculates the average waiting time for all processes for the Preemptive Priority scheduling algorithm.
+     * Calculates the average waiting time for all processes for the Preemptive
+     * Priority scheduling algorithm.
      *
-     * @return The average waiting time for all processes. Returns 0 if there are no processes.
+     * @return The average waiting time for all processes. Returns 0 if there are no
+     *         processes.
      */
     public double getAverageWaitingTimePreemptivePriority() {
         double totalWaitingTime = 0;
@@ -157,9 +165,11 @@ public class CPUScheduler {
     }
 
     /**
-     * Calculates the average turnaround time for all processes for the Preemptive Priority scheduling algorithm.
+     * Calculates the average turnaround time for all processes for the Preemptive
+     * Priority scheduling algorithm.
      *
-     * @return The average turnaround time for all processes. Returns 0 if there are no processes.
+     * @return The average turnaround time for all processes. Returns 0 if there are
+     *         no processes.
      */
     public double getAverageTurnaroundTimePreemptivePriority() {
         double totalTurnaroundTime = 0;

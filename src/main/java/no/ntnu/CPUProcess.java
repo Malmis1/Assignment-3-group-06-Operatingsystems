@@ -160,7 +160,8 @@ public class CPUProcess {
             // Check if the process completes after this execution unit
             if (this.remainingBurstTime == 0) {
                 this.completed = true;
-                // Completion time and other calculations need to be done outside as they depend on global simulation time
+                // Completion time and other calculations need to be done outside as they depend
+                // on global simulation time
             }
         }
     }

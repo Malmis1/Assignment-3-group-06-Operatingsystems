@@ -2,7 +2,6 @@ package no.ntnu;
 
 public class MainTest {
     public static void main(String[] args) {
-
         CPUScheduler CPUScheduler = new CPUScheduler();
         CPUProcess process1 = new CPUProcess(1, 4, 5, 0);
         CPUProcess process2 = new CPUProcess(2, 6, 4, 0);
@@ -19,7 +18,7 @@ public class MainTest {
         double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTime();
         double fcfsAverageWaitingTime = fcfsResults[0];
         double fcfsAverageTurnaroundTime = fcfsResults[1];
-        
+
         // For Preemptive Priority
         CPUScheduler.calculatePreemptivePriority();
         double preemptivePriorityAvgWaitingTime = CPUScheduler.getAverageWaitingTimePreemptivePriority();

@@ -30,6 +30,15 @@ public class CPUScheduler {
     }
 
     /**
+     * Checks if the CPU scheduler contains a process with the specified ID.
+     * 
+     * @return `true` if the CPU scheduler contains a process with the specified ID.
+     */
+    public boolean hasID(int id) {
+        return this.processes.stream().filter(process -> process.getID() == id).findFirst().isPresent();
+    }
+
+    /**
      * Gets a list of all the processes sorted by arrival times in ascending order.
      * 
      * @return a list of all the processes sorted by arrival times.

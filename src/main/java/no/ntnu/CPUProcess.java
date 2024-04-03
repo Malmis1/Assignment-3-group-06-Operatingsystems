@@ -17,7 +17,7 @@ public class CPUProcess {
     private boolean completed = false;
 
     /**
-     * Creates a new instance of {@code CPUProcess}.
+     * Creates a new instance of {@code CPUProcess} with a specified priority.
      * 
      * @param id          the id of the process.
      * @param arrivalTime the arrival time of the process.

@@ -103,59 +103,47 @@ public class CPUScheduler {
     }
 
     public void calculatePreemptivePriority() {
-        // Reset processes for a fresh calculation.
-        for (CPUProcess process : this.processes) {
-            process.setCompletionTime(0);
-            process.resetWaitingAndTurnaroundTimes();
-        }
-
         // Priority queue considering the priority and then the arrival time
         PriorityQueue<CPUProcess> queue = new PriorityQueue<>(
-                Comparator.comparingInt(CPUProcess::getPriority)
-                        .thenComparingInt(CPUProcess::getArrivalTime));
-
-        int currentTime = 0;
-        CPUProcess currentProcess = null;
+                Comparator.comparingInt(CPUProcess::getPriority).thenComparingInt(CPUProcess::getArrivalTime));
 
         // Sort processes by arrival time to manage the arrival of new processes
         List<CPUProcess> sortedProcesses = new ArrayList<>(this.processes);
         sortedProcesses.sort(Comparator.comparingInt(CPUProcess::getArrivalTime));
 
-        while (!sortedProcesses.isEmpty() || !queue.isEmpty() || currentProcess != null) {
+        int currentTime = 0;
+        CPUProcess currentProcess = null;
+        boolean completed = false;
+
+        while (!completed) {
             // Add processes that have arrived by currentTime to the queue
             while (!sortedProcesses.isEmpty() && sortedProcesses.get(0).getArrivalTime() <= currentTime) {
                 queue.add(sortedProcesses.remove(0));
             }
-
             // If current process finished or was never assigned, get next from queue
             if (currentProcess == null || currentProcess.getRemainingBurstTime() <= 0) {
                 if (!queue.isEmpty()) {
                     currentProcess = queue.poll();
-                    currentProcess.setStartTime(currentTime);
                 }
-            } else {
-                // Check for higher priority process
-                if (!queue.isEmpty() && queue.peek().getPriority() < currentProcess.getPriority()) {
-                    CPUProcess preemptedProcess = currentProcess;
-                    currentProcess = queue.poll();
-                    currentProcess.setStartTime(currentTime);
-                    queue.add(preemptedProcess); // Re-add the preempted process back to the queue
-                }
+            } else if (!queue.isEmpty() && queue.peek().getPriority() < currentProcess.getPriority()) { // Check for higher priority process
+                CPUProcess preemptedProcess = currentProcess;
+                currentProcess = queue.poll();
+                queue.add(preemptedProcess);
             }
-
             // Execute current process for a unit time
             if (currentProcess != null) {
                 currentProcess.executeForOneUnit();
-                currentTime++;
-
+                
                 // If the process is completed, update its completion and turnaround times
                 if (currentProcess.getRemainingBurstTime() <= 0) {
                     currentProcess.setCompletionTime(currentTime);
                     currentProcess.calculateTurnaroundTime();
                     currentProcess = null; // Allow picking a new process in the next iteration
                 }
+            }
+            if (!sortedProcesses.isEmpty() || !queue.isEmpty() || currentProcess != null) {
+                completed = true;
             } else {
-                // No process is running; increment time
                 currentTime++;
             }
         }

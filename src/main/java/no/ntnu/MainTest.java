@@ -23,6 +23,7 @@ public class MainTest {
         double fcfsAverageTurnaroundTime = fcfsResults[1];
         
         // For Preemptive Priority
+        CPUScheduler.calculatePreemptivePriority();
         double preemptivePriorityAvgWaitingTime = CPUScheduler.getAverageWaitingTimePreemptivePriority();
         double preemptivePriorityAvgTurnaroundTime = CPUScheduler.getAverageTurnaroundTimePreemptivePriority();
 

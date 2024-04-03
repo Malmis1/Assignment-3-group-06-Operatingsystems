@@ -146,8 +146,6 @@ public class CPUScheduler {
      * @return The average waiting time for all processes. Returns 0 if there are no processes.
      */
     public double getAverageWaitingTimePreemptivePriority() {
-        calculatePreemptivePriority();
-
         double totalWaitingTime = 0;
         for (CPUProcess process : this.processes) {
             totalWaitingTime += process.getWaitingTime();
@@ -162,8 +160,6 @@ public class CPUScheduler {
      * @return The average turnaround time for all processes. Returns 0 if there are no processes.
      */
     public double getAverageTurnaroundTimePreemptivePriority() {
-        calculatePreemptivePriority();
-
         double totalTurnaroundTime = 0;
         for (CPUProcess process : this.processes) {
             totalTurnaroundTime += process.getTurnaroundTime();

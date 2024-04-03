@@ -64,6 +64,7 @@ public class Main {
 
 
         // For Preemptive Priority
+        CPUScheduler.calculatePreemptivePriority();
         double preemptivePriorityAvgWaitingTime = CPUScheduler.getAverageWaitingTimePreemptivePriority();
         double preemptivePriorityAvgTurnaroundTime = CPUScheduler.getAverageTurnaroundTimePreemptivePriority();
 

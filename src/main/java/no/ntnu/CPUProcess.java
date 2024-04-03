@@ -107,7 +107,6 @@ public class CPUProcess {
             throw new IllegalArgumentException("arrival time cannot be less than 0");
         }
         this.arrivalTime = arrivalTime;
-        this.calculateTurnaroundTime();
     }
 
     /**
@@ -140,7 +139,6 @@ public class CPUProcess {
      */
     public void setCompletionTime(double completionTime) {
         this.completionTime = completionTime;
-        this.calculateTurnaroundTime();
     }
 
     /**

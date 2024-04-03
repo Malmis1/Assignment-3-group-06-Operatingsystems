@@ -46,22 +46,6 @@ public class CPUScheduler {
         return sortedProcesses;
     }
 
-
-    /**
-     * Calculates the average waiting time for all processes for the FCFS scheduling algorithm.
-     *
-     * @return The average waiting time for all processes. Returns 0 if there are no processes.
-     */
-    public float getAverageWaitingTimeFCFS() {
-        float combinedWaitingTime = 0;
-
-        for (CPUProcess process : this.processes) {
-            combinedWaitingTime += process.getWaitingTime();
-        }
-
-        return combinedWaitingTime / this.processes.size();
-    }
-
     /**
      * Calculates the average turnaround time for the processes scheduled using FCFS algorithm.
      *
@@ -102,6 +86,9 @@ public class CPUScheduler {
         return new double[]{averageWaitingTime, averageTurnaroundTime};
     }
 
+    /**
+     * Executes preemptive priority scheduling on the process.
+     */
     public void calculatePreemptivePriority() {
         // Priority queue considering the priority and then the arrival time
         PriorityQueue<CPUProcess> queue = new PriorityQueue<>(
@@ -154,10 +141,10 @@ public class CPUScheduler {
      *
      * @return The average waiting time for all processes. Returns 0 if there are no processes.
      */
-    public float getAverageWaitingTimePreemptivePriority() {
+    public double getAverageWaitingTimePreemptivePriority() {
         calculatePreemptivePriority();
 
-        float totalWaitingTime = 0;
+        double totalWaitingTime = 0;
         for (CPUProcess process : this.processes) {
             totalWaitingTime += process.getWaitingTime();
         }

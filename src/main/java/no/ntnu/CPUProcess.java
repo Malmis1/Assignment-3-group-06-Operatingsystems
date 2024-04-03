@@ -9,10 +9,8 @@ public class CPUProcess {
     private int burstTime;
     private int remainingBurstTime;
     private int priority;
-    private float completionTime;
-    private float startTime;
-    private float waitingTime;
-    private float turnaroundTime;
+    private double completionTime;
+    private double turnaroundTime;
     private boolean started = false;
     private boolean completed = false;
 
@@ -34,33 +32,6 @@ public class CPUProcess {
         this.setPriority(priority);
         this.remainingBurstTime = this.burstTime;
         this.completed = false;
-    }
-
-    /**
-     * Creates a new instance of {@code CPUProcess}.
-     * 
-     * @param id          the id of the process.
-     * @param arrivalTime the arrival time of the process.
-     * @param burstTime   the burst time of the process.
-     * @throws IllegalArgumentException if any of the provided parameters are
-     *                                  invalid.
-     */
-    public CPUProcess(int id, int arrivalTime, int burstTime) throws IllegalArgumentException {
-        this.setId(id);
-        this.setArrivalTime(arrivalTime);
-        this.setBurstTime(burstTime);
-        this.setPriority(0);
-        this.remainingBurstTime = this.burstTime;
-        this.completed = false;
-    }
-
-    /**
-     * Gets the id of the process.
-     * 
-     * @return the id of the process.
-     */
-    public int getId() {
-        return this.id;
     }
 
     /**
@@ -108,7 +79,7 @@ public class CPUProcess {
      *
      * @return the waiting time of the process.
      */
-    public float getWaitingTime() {
+    public double getWaitingTime() {
         return this.getTurnaroundTime() - this.burstTime;
     }
 
@@ -117,7 +88,7 @@ public class CPUProcess {
      *
      * @param completionTime the completion time to set.
      */
-    public void setCompletionTime(float completionTime) {
+    public void setCompletionTime(double completionTime) {
         this.completionTime = completionTime;
         this.calculateTurnaroundTime();
     }
@@ -135,7 +106,7 @@ public class CPUProcess {
      *
      * @return the turnaround time of the process.
      */
-    public float getTurnaroundTime() {
+    public double getTurnaroundTime() {
         return this.turnaroundTime;
     }
 
@@ -172,16 +143,6 @@ public class CPUProcess {
     }
 
     /**
-     * Resets the waiting and turnaround times for this process.
-     */
-    public void resetWaitingAndTurnaroundTimes() {
-        // Reset only if the process has started, otherwise keep initial values
-        if (this.started) {
-            this.waitingTime = 0;
-        }
-    }
-
-    /**
      * Gets the remaining burst time of the process.
      *
      * @return The remaining burst time.
@@ -191,18 +152,8 @@ public class CPUProcess {
     }
 
     /**
-     * Sets the start time of the process. This method also marks the process as started.
-     *
-     * @param startTime The start time to set.
+     * Execute the process for one unit of time.
      */
-    public void setStartTime(float startTime) {
-        // Only set the start time if the process hasn't started before
-        if (!this.started) {
-            this.startTime = startTime;
-            this.started = true;
-        }
-    }
-
     public void executeForOneUnit() {
         // Check if the process has remaining time and is not already completed
         if (this.remainingBurstTime > 0 && !this.completed) {

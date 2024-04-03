@@ -37,10 +37,10 @@ public class Main {
             while (!validResponse) {
                 System.out.print("\nDo you want to add another process? (yes/no): ");
                 String response = scanner.next();
-                if (response.equalsIgnoreCase("yes")) {
+                if (response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y")) {
                     validResponse = true;
                     continueAddingProcesses = true;
-                } else if (response.equalsIgnoreCase("no")) {
+                } else if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("n")) {
                     validResponse = true;
                     continueAddingProcesses = false;
                 } else {

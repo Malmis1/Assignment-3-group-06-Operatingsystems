@@ -90,6 +90,10 @@ public class CPUScheduler {
      * Executes preemptive priority scheduling on the process.
      */
     public void calculatePreemptivePriority() {
+        for (CPUProcess process : this.processes) {
+            process.setCompletionTime(0);
+            process.resetTurnaroundTime();
+        }
         // Priority queue considering the priority and then the arrival time
         PriorityQueue<CPUProcess> queue = new PriorityQueue<>(
                 Comparator.comparingInt(CPUProcess::getPriority).thenComparingInt(CPUProcess::getArrivalTime));
@@ -123,12 +127,12 @@ public class CPUScheduler {
                 
                 // If the process is completed, update its completion and turnaround times
                 if (currentProcess.getRemainingBurstTime() <= 0) {
-                    currentProcess.setCompletionTime(currentTime);
+                    currentProcess.setCompletionTime(currentTime + 1);
                     currentProcess.calculateTurnaroundTime();
                     currentProcess = null; // Allow picking a new process in the next iteration
                 }
             }
-            if (!sortedProcesses.isEmpty() || !queue.isEmpty() || currentProcess != null) {
+            if (sortedProcesses.isEmpty() && queue.isEmpty() && currentProcess == null) {
                 completed = true;
             } else {
                 currentTime++;

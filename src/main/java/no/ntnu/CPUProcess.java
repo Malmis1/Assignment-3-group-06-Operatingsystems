@@ -164,4 +164,9 @@ public class CPUProcess {
     public void calculateTurnaroundTime() {
         this.turnaroundTime = this.completionTime - this.arrivalTime;
     }
+
+    public void resetTurnaroundTime() {
+        // Reset only if the process has started, otherwise keep initial values
+        this.turnaroundTime = 0;
+    }
 }

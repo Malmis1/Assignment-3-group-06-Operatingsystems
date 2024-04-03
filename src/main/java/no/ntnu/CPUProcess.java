@@ -49,8 +49,9 @@ public class CPUProcess {
         this.setId(id);
         this.setArrivalTime(arrivalTime);
         this.setBurstTime(burstTime);
+        this.setPriority(0);
         this.remainingBurstTime = this.burstTime;
-        this.priority = 0;
+        this.completed = false;
     }
 
     /**

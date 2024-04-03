@@ -91,18 +91,14 @@ public class CPUScheduler {
             currentProcess.setCompletionTime(completionTime[i]);
             totalTurnaroundTime += completionTime[i] - currentProcess.getArrivalTime();
 
-            // Calculate waiting time for current process
             int waitingTime = startAfterPreviousCompletion - currentProcess.getArrivalTime();
             totalWaitingTime += waitingTime;
         }
 
-        // Calculate average waiting time
         double averageWaitingTime = totalWaitingTime / n;
 
-        // Calculate average turnaround time
         double averageTurnaroundTime = totalTurnaroundTime / n;
 
-        // Return both average waiting time and average turnaround time
         return new double[]{averageWaitingTime, averageTurnaroundTime};
     }
 

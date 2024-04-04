@@ -15,7 +15,7 @@ public class MainTest {
         CPUScheduler.addProcess(process5);
 
         // For FCFS
-        double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTime();
+        double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
         double fcfsAverageWaitingTime = fcfsResults[0];
         double fcfsAverageTurnaroundTime = fcfsResults[1];
 

@@ -84,7 +84,7 @@ public class Main {
         System.out.println("========");
         if (algorithm == 1) {
             // For FCFS
-            double[] fcfsResults = cpuScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
+            double[] fcfsResults = cpuScheduler.calculateAverageTurnaroundAndWaitingTimeFCFS();
             double fcfsAverageWaitingTime = fcfsResults[0];
             double fcfsAverageTurnaroundTime = fcfsResults[1];
             System.out.println("FCFS Average Waiting Time: " + fcfsAverageWaitingTime);
@@ -114,7 +114,7 @@ public class Main {
                 }
             } catch (Exception e) {
                 System.out.println("Please type a valid number.");
-                scanner.next();  // Avoids looping bug
+                scanner.next(); // Avoids looping bug
             }
         }
     }

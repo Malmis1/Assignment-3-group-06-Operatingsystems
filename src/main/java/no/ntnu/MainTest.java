@@ -5,7 +5,7 @@ public class MainTest {
         no.ntnu.CPUScheduler cpuScheduler = getCpuScheduler();
 
         // For FCFS
-        double[] fcfsResults = cpuScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
+        double[] fcfsResults = cpuScheduler.calculateAverageTurnaroundAndWaitingTimeFCFS();
         double fcfsAverageWaitingTime = fcfsResults[0];
         double fcfsAverageTurnaroundTime = fcfsResults[1];
 

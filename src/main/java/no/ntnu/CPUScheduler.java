@@ -65,7 +65,7 @@ public class CPUScheduler {
      * @throws IllegalStateException if there are no processes added or if the queue
      *                               is empty.
      */
-    public double[] calculateAverageTurnaroundAndWaitingTimeFCS() throws IllegalStateException {
+    public double[] calculateAverageTurnaroundAndWaitingTimeFCFS() throws IllegalStateException {
         List<CPUProcess> sortedQueue = getSortedQueue();
         if (sortedQueue.isEmpty()) {
             throw new IllegalStateException("No processes added.");

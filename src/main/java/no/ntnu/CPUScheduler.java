@@ -35,7 +35,7 @@ public class CPUScheduler {
      * @return `true` if the CPU scheduler contains a process with the specified ID.
      */
     public boolean hasID(int id) {
-        return this.processes.stream().filter(process -> process.getID() == id).findFirst().isPresent();
+        return this.processes.stream().anyMatch(process -> process.getID() == id);
     }
 
     /**
@@ -73,7 +73,7 @@ public class CPUScheduler {
 
         int n = sortedQueue.size();
         int[] completionTime = new int[n];
-        double totalTurnaroundTime = 0;
+        double totalTurnaroundTime;
         double totalWaitingTime = 0;
 
         completionTime[0] = sortedQueue.get(0).getBurstTime() + sortedQueue.get(0).getArrivalTime();

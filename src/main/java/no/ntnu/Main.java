@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CPUScheduler CPUScheduler = new CPUScheduler();
+        CPUScheduler cpuScheduler = new CPUScheduler();
 
         boolean validResponse = false;
         int algorithm = 1;
@@ -40,7 +40,7 @@ public class Main {
                 System.out.println("\nProcess id: ");
                 try {
                     id = scanner.nextInt();
-                    if (!CPUScheduler.hasID(id)) {
+                    if (!cpuScheduler.hasID(id)) {
                         validID = true;
                     } else {
                         System.out.println("Process with id '" + id + "' already exists.");
@@ -63,7 +63,7 @@ public class Main {
             }
 
             CPUProcess process = new CPUProcess(id, arrivalTime, burstTime, priority);
-            CPUScheduler.addProcess(process);
+            cpuScheduler.addProcess(process);
 
             validResponse = false;
             while (!validResponse) {
@@ -71,7 +71,6 @@ public class Main {
                 String response = scanner.next();
                 if (response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y")) {
                     validResponse = true;
-                    continueAddingProcesses = true;
                 } else if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("n")) {
                     validResponse = true;
                     continueAddingProcesses = false;
@@ -79,23 +78,22 @@ public class Main {
                     System.out.println("Invalid input. Please enter 'yes' or 'no'.");
                 }
             }
-            id++;
         }
 
         System.out.println("\nResults:");
         System.out.println("========");
         if (algorithm == 1) {
             // For FCFS
-            double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
+            double[] fcfsResults = cpuScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
             double fcfsAverageWaitingTime = fcfsResults[0];
             double fcfsAverageTurnaroundTime = fcfsResults[1];
             System.out.println("FCFS Average Waiting Time: " + fcfsAverageWaitingTime);
             System.out.println("FCFS Average Turnaround Time: " + fcfsAverageTurnaroundTime);
         } else {
             // For Preemptive Priority
-            CPUScheduler.calculatePreemptivePriority();
-            double preemptivePriorityAvgWaitingTime = CPUScheduler.getAverageWaitingTimePreemptivePriority();
-            double preemptivePriorityAvgTurnaroundTime = CPUScheduler.getAverageTurnaroundTimePreemptivePriority();
+            cpuScheduler.calculatePreemptivePriority();
+            double preemptivePriorityAvgWaitingTime = cpuScheduler.getAverageWaitingTimePreemptivePriority();
+            double preemptivePriorityAvgTurnaroundTime = cpuScheduler.getAverageTurnaroundTimePreemptivePriority();
             System.out.println("Preemptive Priority Average Waiting Time: " + preemptivePriorityAvgWaitingTime);
             System.out.println("Preemptive Priority Average Turnaround Time: " + preemptivePriorityAvgTurnaroundTime);
         }

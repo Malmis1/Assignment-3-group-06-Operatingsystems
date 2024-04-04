@@ -86,7 +86,7 @@ public class Main {
         System.out.println("========");
         if (algorithm == 1) {
             // For FCFS
-            double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTime();
+            double[] fcfsResults = CPUScheduler.calculateAverageTurnaroundAndWaitingTimeFCS();
             double fcfsAverageWaitingTime = fcfsResults[0];
             double fcfsAverageTurnaroundTime = fcfsResults[1];
             System.out.println("FCFS Average Waiting Time: " + fcfsAverageWaitingTime);

@@ -78,7 +78,7 @@ public class CPUScheduler {
 
         completionTime[0] = sortedQueue.get(0).getBurstTime() + sortedQueue.get(0).getArrivalTime();
         sortedQueue.get(0).setCompletionTime(completionTime[0]);
-        totalTurnaroundTime = completionTime[0] - sortedQueue.get(0).getArrivalTime();
+        totalTurnaroundTime = (double) completionTime[0] - sortedQueue.get(0).getArrivalTime();
 
         for (int i = 1; i < n; i++) {
             CPUProcess currentProcess = sortedQueue.get(i);
@@ -144,7 +144,7 @@ public class CPUScheduler {
 
                 // If the process is completed, update its completion and turnaround times
                 if (currentProcess.getRemainingBurstTime() <= 0) {
-                    currentProcess.setCompletionTime(currentTime + 1);
+                    currentProcess.setCompletionTime(currentTime + 1.0);
                     currentProcess.calculateTurnaroundTime();
                     currentProcess = null; // Allow picking a new process in the next iteration
                 }

@@ -24,7 +24,7 @@ public class Main {
                 }
             } catch (Exception e) {
                 System.out.println("Please input a valid number.");
-                scanner.next(); // avoids looping bug
+                scanner.next(); // Avoids looping bug
             }
         }
 
@@ -40,27 +40,27 @@ public class Main {
                 System.out.println("\nProcess id: ");
                 try {
                     id = scanner.nextInt();
-                    if (!cpuScheduler.hasID(id)) {
-                        validID = true;
-                    } else {
+                    if (id < 0) {
+                        System.out.println("Please enter a non-negative ID.");
+                    } else if (cpuScheduler.hasID(id)) {
                         System.out.println("Process with id '" + id + "' already exists.");
+                    } else {
+                        validID = true;
                     }
                 } catch (Exception e) {
                     System.out.println("Please type a valid id number.");
-                    scanner.next(); // avoids looping bug
+                    scanner.next(); // Avoids looping bug
                 }
             }
 
-            int arrivalTime = 0;
-            arrivalTime = requestInt(scanner, arrivalTime, "Arrival Time: ");
-
-            int burstTime = 0;
-            burstTime = requestInt(scanner, arrivalTime, "Burst Time: ");
+            int arrivalTime = requestInt(scanner, "Arrival Time: ");
+            int burstTime = requestInt(scanner, "Burst Time: ");
 
             int priority = 0;
             if (algorithm == 2) {
-                priority = requestInt(scanner, arrivalTime, "Priority: ");
+                priority = requestInt(scanner, "Priority: ");
             }
+
 
             CPUProcess process = new CPUProcess(id, arrivalTime, burstTime, priority);
             cpuScheduler.addProcess(process);
@@ -101,18 +101,23 @@ public class Main {
         scanner.close();
     }
 
-    private static int requestInt(Scanner scanner, int value, String prompt) {
-        boolean validInput = false;
-        while (!validInput) {
+    private static int requestInt(Scanner scanner, String prompt) {
+        int value;
+        while (true) {
             System.out.print(prompt);
             try {
                 value = scanner.nextInt();
-                validInput = true;
+                if (value >= 0) {
+                    return value;
+                } else {
+                    System.out.println("Please enter a non-negative value.");
+                }
             } catch (Exception e) {
                 System.out.println("Please type a valid number.");
-                scanner.next(); // avoids looping bug
+                scanner.next();  // Avoids looping bug
             }
         }
-        return value;
     }
+
+
 }

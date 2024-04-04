@@ -13,6 +13,7 @@ public class Main {
             System.out.println("Please select one of the following CPU scheduling algorithm:");
             System.out.println("1) First Come First Serve (FCFS)");
             System.out.println("2) Preemptive priority");
+            System.out.println("Please choose an option:");
 
             try {
                 algorithm = scanner.nextInt();
